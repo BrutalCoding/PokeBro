@@ -34,7 +34,7 @@ namespace PokeBro.Droid
             //var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             //Toolbar will now take on default actionbar characteristics
             //SetSupportActionBar(toolbar);
-            SupportActionBar.Title = "PokeBro - All In One Guide";
+            //SupportActionBar.Title = "PokeBro - All In One Guide";
 
             Forms.Init(this, bundle);
             LoadApplication(new App());
