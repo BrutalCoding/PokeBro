@@ -42,6 +42,8 @@
     <Compile Include="IVCalc.cs" />
     <Compile Include="LuckyEgg.cs" />
     <Compile Include="PageTabs.cs" />
+    <Compile Include="PokemonBaseStats.cs" />
+    <Compile Include="PokemonData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

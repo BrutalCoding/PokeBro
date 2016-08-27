@@ -6,12 +6,8 @@ namespace PokeBro
 {
     internal class IVCalc : ContentPage
     {
-        // Dictionary to get Color from color name.
-        List<string> listOfPokemon = new List<string>
-        {
-            { "Abra"},
-            { "Aero"}
-        };
+        //Create the class PD so we can access all Pokemon data.
+        PokemonData pokemonData = new PokemonData();
 
         public Entry inputCP { get; set; }
         public Entry inputHP { get; set; }
@@ -30,7 +26,7 @@ namespace PokeBro
                 Margin = new Thickness(0, 0, 0, 50)
             };
 
-            foreach (string pokemon in listOfPokemon)
+            foreach (string pokemon in pokemonData.listOfPokemon.Keys)
             {
                 picker.Items.Add(pokemon);
             }
@@ -81,16 +77,11 @@ namespace PokeBro
         {
             //Formula from this reddit thread: https://www.reddit.com/r/TheSilphRoad/comments/4t7r4d/exact_pokemon_cp_formula/
 
-            double baseAttack = 0;
-            double baseDefense = 0;
-            double baseStamina = Convert.ToDouble(inputHP.Text) * 2;
-            switch (listOfPokemon[picker.SelectedIndex])
-            {
-                case "Abra":
-                    baseAttack = 110;
-                    baseDefense = 76;
-                    break;
-            }
+            double baseAttack = pokemonData.listOfPokemon[picker.Items[picker.SelectedIndex]].attack;
+            double baseDefense = pokemonData.listOfPokemon[picker.Items[picker.SelectedIndex]].defense;
+            double baseStamina = pokemonData.listOfPokemon[picker.Items[picker.SelectedIndex]].stamina;
+
+            DisplayAlert(picker.Items[picker.SelectedIndex], String.Format("Attack: {0} | Def: {1} | Stamina: {2} \n It", baseAttack.ToString(), baseDefense.ToString(), baseStamina.ToString()), "OK");
             //double IV = 0;
             //double MaxCP = 0.1 * ((baseAttack + IV) * (baseDefense + IV) ^ 0.5 * (baseStamina + IV) ^ 0.5 * (CpM + ACpM) ^ 2);
 
