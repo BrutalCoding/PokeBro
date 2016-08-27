@@ -10,7 +10,7 @@ namespace PokeBro
             ToolbarItems.Add(new ToolbarItem("Share", "ic_share_white_24dp.png", () =>
             {
             }));
-            Children.Add(new IVCalc() { Title = "IV Calc" });asd
+            Children.Add(new IVCalc() { Title = "IV Calc" });
             Children.Add(new LuckyEgg() { Title = "Lucky Egg" });
             Children.Add(new BattleHelper() { Title = "Battle Helper" });
             Children.Add(new Badges() { Title = "Badges" });
