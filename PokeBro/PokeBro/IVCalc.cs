@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 
 namespace PokeBro
@@ -11,11 +12,13 @@ namespace PokeBro
 
         public Entry inputCP { get; set; }
         public Entry inputHP { get; set; }
+        public Entry inputStardust { get; set; }
         Picker picker;
         public IVCalc()
         {
             var layout = new StackLayout { Padding = new Thickness(15,15) };
-            Content = layout;
+            var scrollview = new ScrollView { Padding = new Thickness(5, 5), Content = layout };
+            Content = scrollview;
             var labelPicker = new Label { Text = "Choose your monster", TextColor = Color.Black, FontSize = 20};
 
             //Go through each Pokemon and add them to the list.
@@ -37,8 +40,8 @@ namespace PokeBro
             var labelInputHP = new Label { Text = "HP", TextColor = Color.Black, FontSize = 14 };
             inputHP = new Entry { Text = "", Keyboard = Keyboard.Numeric };
 
-            var labelInputStartdust = new Label { Text = "Stardust", TextColor = Color.Black, FontSize = 14 };
-            var inputStartdust = new Entry { Text = "", Keyboard = Keyboard.Numeric };
+            var labelInputStardust = new Label { Text = "Stardust", TextColor = Color.Black, FontSize = 14 };
+            inputStardust = new Entry { Text = "", Keyboard = Keyboard.Numeric };
 
             var labelSwitch = new Label { Text = "I have power upped this monster", TextColor = Color.Black, FontSize = 14 };
             Switch switcher = new Switch { HorizontalOptions = LayoutOptions.Start, VerticalOptions = LayoutOptions.Start};
@@ -61,8 +64,8 @@ namespace PokeBro
             layout.Children.Add(inputCP);
             layout.Children.Add(labelInputHP);
             layout.Children.Add(inputHP);
-            layout.Children.Add(labelInputStartdust);
-            layout.Children.Add(inputStartdust);
+            layout.Children.Add(labelInputStardust);
+            layout.Children.Add(inputStardust);
             layout.Children.Add(labelSwitch);
             layout.Children.Add(switcher);
             layout.Children.Add(btnCalculate);
@@ -75,16 +78,68 @@ namespace PokeBro
 
         void OnButtonClicked(object sender, EventArgs e)
         {
-            //Formula from this reddit thread: https://www.reddit.com/r/TheSilphRoad/comments/4t7r4d/exact_pokemon_cp_formula/
+            var newPoke = new Pokemon()
+            {
+                CP = int.Parse(inputCP.Text),
+                Health = int.Parse(inputHP.Text),
+                GivenName = picker.Items[picker.SelectedIndex],
+                Stardust = int.Parse(inputStardust.Text)
+            };
+            newPoke.Calculate();
+            ShowStats(newPoke);
+            //DisplayAlert(picker.Items[picker.SelectedIndex], String.Format("Attack: {0} | Def: {1} | Stamina: {2} \nCombinations possible: {3}", newPoke.FastAttack, baseDefense.ToString(), baseStamina.ToString(), newPoke.Levels.Count), "OK");
+        }
 
-            double baseAttack = pokemonData.listOfPokemon[picker.Items[picker.SelectedIndex]].attack;
-            double baseDefense = pokemonData.listOfPokemon[picker.Items[picker.SelectedIndex]].defense;
-            double baseStamina = pokemonData.listOfPokemon[picker.Items[picker.SelectedIndex]].stamina;
+        private void ShowStats(Pokemon pokemon)
+        {
+            double max = 0, min = 100, avg = 0;
+            int cnt = 0;
+            foreach (var stats in pokemon.Levels.Select(levels => new StatSet(levels.Level, levels.Siv, levels.Aiv, levels.Div,
+                (cnt - 5) / 5 * 27 + 27, ref max, ref min, ref avg)))
+            {
+                cnt += 5;
+            }
 
-            DisplayAlert(picker.Items[picker.SelectedIndex], String.Format("Attack: {0} | Def: {1} | Stamina: {2} \n It", baseAttack.ToString(), baseDefense.ToString(), baseStamina.ToString()), "OK");
-            //double IV = 0;
-            //double MaxCP = 0.1 * ((baseAttack + IV) * (baseDefense + IV) ^ 0.5 * (baseStamina + IV) ^ 0.5 * (CpM + ACpM) ^ 2);
+            inputCP.Text = $"{max / 45:P0}";
+            inputHP.Text = $"{min / 45:P0}";
+            inputStardust.Text = $"{avg / pokemon.Levels.Count / 45:P0}";
+        }
 
+        private struct StatSet
+        {
+            public readonly Label Lvl;
+            public readonly Label Sta;
+            public readonly Label Atk;
+            public readonly Label Def;
+            public readonly Label Perfection;
+
+            public StatSet(double level, int sta, int atk, int def, int y, ref double max, ref double min, ref double avg)
+            {
+                Lvl = new Label()
+                {
+                    Text = level.ToString()
+                };
+
+                Sta = new Label()
+                {
+                    Text = sta.ToString()
+                };
+                Atk = new Label()
+                {
+                    Text = atk.ToString()
+                };
+                Def = new Label()
+                {
+                    Text = def.ToString()
+                };
+                Perfection = new Label()
+                {
+                    Text = $"{(double)(atk + def + sta) / 45:P}"
+                };
+                max = max < atk + def + sta ? atk + def + sta : max;
+                min = min > atk + def + sta ? atk + def + sta : min;
+                avg += atk + def + sta;
+            }
         }
     }
 }
