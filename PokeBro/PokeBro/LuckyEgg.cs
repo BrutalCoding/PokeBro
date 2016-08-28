@@ -17,7 +17,8 @@ namespace PokeBro
         public LuckyEgg()
         {
             var layout = new StackLayout { Padding = new Thickness(15, 15) };
-            Content = layout;
+            var scrollview = new ScrollView { Padding = new Thickness(5, 5), Content = layout };
+            Content = scrollview;
             var labelPicker = new Label { Text = "Your list of monsters (+ amount of candies)", TextColor = Color.Black, FontSize = 16 };
             picker = new ListView();
             picker.ItemTapped += OnTap;
