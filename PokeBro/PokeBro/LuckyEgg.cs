@@ -20,7 +20,10 @@ namespace PokeBro
             var scrollview = new ScrollView { Padding = new Thickness(5, 5), Content = layout };
             Content = scrollview;
             var labelPicker = new Label { Text = "Your list of monsters (+ amount of candies)", TextColor = Color.Black, FontSize = 16 };
-            picker = new ListView();
+            picker = new ListView
+            {
+                HeightRequest = 75
+            };
             picker.ItemTapped += OnTap;
 
             var labelMonsterToAdd = new Label { Text = "Add every monster you wish to evolve", TextColor = Color.Black, FontSize = 16 };
@@ -29,8 +32,7 @@ namespace PokeBro
             pickerMonsterToAdd = new Picker
             {
                 Title = "...",
-                VerticalOptions = LayoutOptions.Start,
-                Margin = new Thickness(0, 0, 0, 20)
+                VerticalOptions = LayoutOptions.Start
             };
             foreach (string pokemon in pokemonData.listOfPokemon.Keys)
             {
@@ -60,9 +62,9 @@ namespace PokeBro
                 BackgroundColor = Color.FromHex("#42A5F5"),
                 TextColor = Color.White,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.CenterAndExpand
+                VerticalOptions = LayoutOptions.EndAndExpand
             };
-            btnCalculate.Clicked += OnButtonClicked;
+            btnCalculate.Clicked += btnCalculate_OnClick ;
 
             layout.Children.Add(labelPicker);
             layout.Children.Add(picker);
@@ -82,9 +84,11 @@ namespace PokeBro
             listOfAddedMonsters.Add(pickerMonsterToAdd.Items[pickerMonsterToAdd.SelectedIndex] + " (" + inputCandies.Text + ")");
         }
 
-        void OnButtonClicked(object sender, EventArgs e)
+        void btnCalculate_OnClick(object sender, EventArgs e)
         {
             //Formula from this reddit thread: https://www.reddit.com/r/TheSilphRoad/comments/4t7r4d/exact_pokemon_cp_formula/
+            var Pokemon = new Pokemon();
+
             //DisplayAlert(pickerMonsterToAdd.Items[pickerMonsterToAdd.SelectedIndex], "Test", "OK");
         }
 
