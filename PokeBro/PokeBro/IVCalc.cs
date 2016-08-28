@@ -82,50 +82,59 @@ namespace PokeBro
 
         void btnCalculate_OnClick(object sender, EventArgs e)
         {
-            var newPoke = new Pokemon()
+            //Check if every field has been filled in
+            if (picker.SelectedIndex != -1
+                && !string.IsNullOrEmpty(inputCP.Text)
+                && !string.IsNullOrEmpty(inputHP.Text)
+                && !string.IsNullOrEmpty(inputStardust.Text))
             {
-                CP = int.Parse(inputCP.Text),
-                Health = int.Parse(inputHP.Text),
-                GivenName = picker.Items[picker.SelectedIndex],
-                Stardust = int.Parse(inputStardust.Text)
-            };
-            newPoke.Calculate();
-            ShowStats(newPoke);
+                //Create the pokemon
+                var newPoke = new Pokemon()
+                {
+                    CP = int.Parse(inputCP.Text),
+                    Health = int.Parse(inputHP.Text),
+                    GivenName = picker.Items[picker.SelectedIndex],
+                    Stardust = int.Parse(inputStardust.Text)
+                };
+                newPoke.Calculate();
+                ShowStats(newPoke);
 
-            layout.Children.Clear();
+                layout.Children.Clear();
 
-            var labelPossible = new Label { Text = "Possible combinations", TextColor = Color.Black, FontSize = 25, HorizontalTextAlignment = TextAlignment.Center };
-            var labelPossibleAmount = new Label { Text = newPoke.Levels.Count.ToString(), FontAttributes = FontAttributes.Bold, TextColor = Color.Black, FontSize = 35, HorizontalTextAlignment = TextAlignment.Center };
-            layout.Children.Add(labelPossible);
-            layout.Children.Add(labelPossibleAmount);
-            if (newPoke.Levels.Count > 1)
-            {
-                //If more than 1 combinations are found, inform the user what this means
-                var labelNotice = new Label { Text = "More than 1 possibility found, these are your cases: ", TextColor = Color.Black, FontSize = 12, HorizontalTextAlignment = TextAlignment.Center };
-                layout.Children.Add(labelNotice);
+                var labelPossible = new Label { Text = "Possible combinations", TextColor = Color.Black, FontSize = 25, HorizontalTextAlignment = TextAlignment.Center };
+                var labelPossibleAmount = new Label { Text = newPoke.Levels.Count.ToString(), FontAttributes = FontAttributes.Bold, TextColor = Color.Black, FontSize = 35, HorizontalTextAlignment = TextAlignment.Center };
+                layout.Children.Add(labelPossible);
+                layout.Children.Add(labelPossibleAmount);
+                if (newPoke.Levels.Count > 1)
+                {
+                    //If more than 1 combinations are found, inform the user what this means
+                    var labelNotice = new Label { Text = "I have found more than 1 possibility, these are your scores:", TextColor = Color.Black, FontSize = 12, HorizontalTextAlignment = TextAlignment.Center };
+                    layout.Children.Add(labelNotice);
+                }
+                var labelMaximum = new Label { Text = "Best: " + IVScoreBest, TextColor = Color.Black, FontSize = 20 };
+                var labelAverage = new Label { Text = "Average: " + IVScoreAverage, TextColor = Color.Black, FontSize = 20 };
+                var labelWorst = new Label { Text = "Worst: " + IVScoreWorst, TextColor = Color.Black, FontSize = 20 };
+
+                layout.Children.Add(labelMaximum);
+                layout.Children.Add(labelAverage);
+                layout.Children.Add(labelWorst);
+
+
+                btnGoBack = new Button
+                {
+                    Text = "Go back",
+                    Font = Font.SystemFontOfSize(NamedSize.Large),
+                    BorderWidth = 1,
+                    BackgroundColor = Color.FromHex("#42A5F5"),
+                    TextColor = Color.White,
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    VerticalOptions = LayoutOptions.CenterAndExpand
+                };
+                btnGoBack.Clicked += btnGoBack_OnClick;
+
+                layout.Children.Add(btnGoBack);
+                //DisplayAlert(picker.Items[picker.SelectedIndex], String.Format("Attack: {0} | Def: {1} | Stamina: {2} \nCombinations possible: {3}", newPoke.FastAttack, baseDefense.ToString(), baseStamina.ToString(), newPoke.Levels.Count), "OK");
             }
-            var labelMaximum = new Label { Text = "Best: " + IVScoreBest, TextColor = Color.Black, FontSize = 16};
-            var labelAverage = new Label { Text = "Average: " + IVScoreAverage, TextColor = Color.Black, FontSize = 16};
-            var labelWorst = new Label { Text = "Worst: " + IVScoreWorst, TextColor = Color.Black, FontSize = 16};
-
-            layout.Children.Add(labelMaximum);
-            layout.Children.Add(labelAverage);
-            layout.Children.Add(labelWorst);
-            
-
-            btnGoBack = new Button
-            {
-                Text = "Calculate",
-                Font = Font.SystemFontOfSize(NamedSize.Large),
-                BorderWidth = 1,
-                BackgroundColor = Color.FromHex("#42A5F5"),
-                TextColor = Color.White,
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.CenterAndExpand
-            };
-            btnGoBack.Clicked += btnGoBack_OnClick;
-
-            //DisplayAlert(picker.Items[picker.SelectedIndex], String.Format("Attack: {0} | Def: {1} | Stamina: {2} \nCombinations possible: {3}", newPoke.FastAttack, baseDefense.ToString(), baseStamina.ToString(), newPoke.Levels.Count), "OK");
         }
 
         void btnGoBack_OnClick(object sender, EventArgs e)
