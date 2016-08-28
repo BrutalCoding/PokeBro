@@ -10,16 +10,31 @@ namespace PokeBro
         //Create the class PD so we can access all Pokemon data.
         PokemonData pokemonData = new PokemonData();
 
-        public Entry inputCP { get; set; }
-        public Entry inputHP { get; set; }
-        public Entry inputStardust { get; set; }
+        //Define layout so we can adjust it from every method
+        StackLayout layout;
+        Entry inputCP;
+        Entry inputHP;
+        Entry inputStardust;
+
+        Label labelPicker;
+        Label labelInputCP;
+        Label labelInputHP;
+        Label labelInputStardust;
+
+        Button btnCalculate;
+        Button btnGoBack;
         Picker picker;
+
+        string IVScoreAverage;
+        string IVScoreBest;
+        string IVScoreWorst;
+
         public IVCalc()
         {
-            var layout = new StackLayout { Padding = new Thickness(15,15) };
+            layout = new StackLayout { Padding = new Thickness(15,15) };
             var scrollview = new ScrollView { Padding = new Thickness(5, 5), Content = layout };
             Content = scrollview;
-            var labelPicker = new Label { Text = "Choose your monster", TextColor = Color.Black, FontSize = 20};
+            labelPicker = new Label { Text = "Choose your monster", TextColor = Color.Black, FontSize = 20};
 
             //Go through each Pokemon and add them to the list.
             picker = new Picker
@@ -34,20 +49,16 @@ namespace PokeBro
                 picker.Items.Add(pokemon);
             }
 
-            var labelInputCP = new Label { Text = "CP", TextColor = Color.Black, FontSize = 14 };
+            labelInputCP = new Label { Text = "CP", TextColor = Color.Black, FontSize = 14 };
             inputCP = new Entry { Text = "", Keyboard = Keyboard.Numeric };
 
-            var labelInputHP = new Label { Text = "HP", TextColor = Color.Black, FontSize = 14 };
+            labelInputHP = new Label { Text = "HP", TextColor = Color.Black, FontSize = 14 };
             inputHP = new Entry { Text = "", Keyboard = Keyboard.Numeric };
 
-            var labelInputStardust = new Label { Text = "Stardust", TextColor = Color.Black, FontSize = 14 };
+            labelInputStardust = new Label { Text = "Stardust", TextColor = Color.Black, FontSize = 14 };
             inputStardust = new Entry { Text = "", Keyboard = Keyboard.Numeric };
 
-            var labelSwitch = new Label { Text = "I have power upped this monster", TextColor = Color.Black, FontSize = 14 };
-            Switch switcher = new Switch { HorizontalOptions = LayoutOptions.Start, VerticalOptions = LayoutOptions.Start};
-            switcher.Toggled += switcher_Toggled;
-
-            var btnCalculate = new Button {
+            btnCalculate = new Button {
                 Text = "Calculate",
                 Font = Font.SystemFontOfSize(NamedSize.Large),
                 BorderWidth = 1,
@@ -56,7 +67,7 @@ namespace PokeBro
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
-            btnCalculate.Clicked += OnButtonClicked;
+            btnCalculate.Clicked += btnCalculate_OnClick;
 
             layout.Children.Add(labelPicker);
             layout.Children.Add(picker);
@@ -66,17 +77,10 @@ namespace PokeBro
             layout.Children.Add(inputHP);
             layout.Children.Add(labelInputStardust);
             layout.Children.Add(inputStardust);
-            layout.Children.Add(labelSwitch);
-            layout.Children.Add(switcher);
             layout.Children.Add(btnCalculate);
         }
 
-        void switcher_Toggled(object sender, ToggledEventArgs e)
-        {
-            //The chosen pokemon has been power upped, which will give a different result
-        }
-
-        void OnButtonClicked(object sender, EventArgs e)
+        void btnCalculate_OnClick(object sender, EventArgs e)
         {
             var newPoke = new Pokemon()
             {
@@ -87,7 +91,55 @@ namespace PokeBro
             };
             newPoke.Calculate();
             ShowStats(newPoke);
+
+            layout.Children.Clear();
+
+            var labelPossible = new Label { Text = "Possible combinations", TextColor = Color.Black, FontSize = 25, HorizontalTextAlignment = TextAlignment.Center };
+            var labelPossibleAmount = new Label { Text = newPoke.Levels.Count.ToString(), FontAttributes = FontAttributes.Bold, TextColor = Color.Black, FontSize = 35, HorizontalTextAlignment = TextAlignment.Center };
+            layout.Children.Add(labelPossible);
+            layout.Children.Add(labelPossibleAmount);
+            if (newPoke.Levels.Count > 1)
+            {
+                //If more than 1 combinations are found, inform the user what this means
+                var labelNotice = new Label { Text = "More than 1 possibility found, these are your cases: ", TextColor = Color.Black, FontSize = 12, HorizontalTextAlignment = TextAlignment.Center };
+                layout.Children.Add(labelNotice);
+            }
+            var labelMaximum = new Label { Text = "Best: " + IVScoreBest, TextColor = Color.Black, FontSize = 16};
+            var labelAverage = new Label { Text = "Average: " + IVScoreAverage, TextColor = Color.Black, FontSize = 16};
+            var labelWorst = new Label { Text = "Worst: " + IVScoreWorst, TextColor = Color.Black, FontSize = 16};
+
+            layout.Children.Add(labelMaximum);
+            layout.Children.Add(labelAverage);
+            layout.Children.Add(labelWorst);
+            
+
+            btnGoBack = new Button
+            {
+                Text = "Calculate",
+                Font = Font.SystemFontOfSize(NamedSize.Large),
+                BorderWidth = 1,
+                BackgroundColor = Color.FromHex("#42A5F5"),
+                TextColor = Color.White,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.CenterAndExpand
+            };
+            btnGoBack.Clicked += btnGoBack_OnClick;
+
             //DisplayAlert(picker.Items[picker.SelectedIndex], String.Format("Attack: {0} | Def: {1} | Stamina: {2} \nCombinations possible: {3}", newPoke.FastAttack, baseDefense.ToString(), baseStamina.ToString(), newPoke.Levels.Count), "OK");
+        }
+
+        void btnGoBack_OnClick(object sender, EventArgs e)
+        {
+            layout.Children.Clear();
+            layout.Children.Add(labelPicker);
+            layout.Children.Add(picker);
+            layout.Children.Add(labelInputCP);
+            layout.Children.Add(inputCP);
+            layout.Children.Add(labelInputHP);
+            layout.Children.Add(inputHP);
+            layout.Children.Add(labelInputStardust);
+            layout.Children.Add(inputStardust);
+            layout.Children.Add(btnCalculate);
         }
 
         private void ShowStats(Pokemon pokemon)
@@ -100,9 +152,9 @@ namespace PokeBro
                 cnt += 5;
             }
 
-            inputCP.Text = $"{max / 45:P0}";
-            inputHP.Text = $"{min / 45:P0}";
-            inputStardust.Text = $"{avg / pokemon.Levels.Count / 45:P0}";
+            IVScoreBest = $"{max / 45:P0}";
+            IVScoreWorst = $"{min / 45:P0}";
+            IVScoreAverage= $"{avg / pokemon.Levels.Count / 45:P0}";
         }
 
         private struct StatSet
