@@ -30,7 +30,7 @@ namespace PokeBro
             {
                 Title = "...",
                 VerticalOptions = LayoutOptions.Start,
-                Margin = new Thickness(0, 0, 0, 50)
+                Margin = new Thickness(0, 0, 0, 20)
             };
             foreach (string pokemon in pokemonData.listOfPokemon.Keys)
             {

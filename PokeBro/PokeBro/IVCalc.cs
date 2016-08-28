@@ -65,7 +65,7 @@ namespace PokeBro
                 BackgroundColor = Color.FromHex("#42A5F5"),
                 TextColor = Color.White,
                 HorizontalOptions = LayoutOptions.FillAndExpand,
-                VerticalOptions = LayoutOptions.CenterAndExpand
+                VerticalOptions = LayoutOptions.EndAndExpand
             };
             btnCalculate.Clicked += btnCalculate_OnClick;
 
@@ -128,7 +128,7 @@ namespace PokeBro
                     BackgroundColor = Color.FromHex("#42A5F5"),
                     TextColor = Color.White,
                     HorizontalOptions = LayoutOptions.FillAndExpand,
-                    VerticalOptions = LayoutOptions.CenterAndExpand
+                    VerticalOptions = LayoutOptions.EndAndExpand
                 };
                 btnGoBack.Clicked += btnGoBack_OnClick;
 
