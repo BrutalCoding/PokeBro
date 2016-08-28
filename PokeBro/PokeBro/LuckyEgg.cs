@@ -84,7 +84,7 @@ namespace PokeBro
         void OnButtonClicked(object sender, EventArgs e)
         {
             //Formula from this reddit thread: https://www.reddit.com/r/TheSilphRoad/comments/4t7r4d/exact_pokemon_cp_formula/
-            DisplayAlert(pickerMonsterToAdd.Items[pickerMonsterToAdd.SelectedIndex], "Test", "OK");
+            //DisplayAlert(pickerMonsterToAdd.Items[pickerMonsterToAdd.SelectedIndex], "Test", "OK");
         }
 
         async void OnTap(object sender, ItemTappedEventArgs e)
