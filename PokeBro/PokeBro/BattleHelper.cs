@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Xamarin.Forms;
 namespace PokeBro
 {
@@ -10,13 +13,24 @@ namespace PokeBro
         Label labelMonster2Text;
         Picker pickerMonster1ToAdd;
         Picker pickerMonster2ToAdd;
-        PokemonData pokemonData = new PokemonData();
+        //PokemonData pokemonData = new PokemonData();
+        PokemonBaseStats pokemonData = new PokemonBaseStats();
         Button btnCalculate;
         public BattleHelper()
         {
             layout = new StackLayout { Padding = new Thickness(15, 15) };
             var scrollview = new ScrollView { Padding = new Thickness(5, 5), Content = layout };
             Content = scrollview;
+
+            //Load all pokemon data
+            pokemonData.LoadPokes();
+
+            //We want the list from pokemondata converted to ObservableCollection so we can order it
+            SortedDictionary<string, Pokemon> pokesTemp = new SortedDictionary<string, Pokemon>();
+            foreach (var poke in pokemonData.pokes)
+                pokesTemp.Add(poke.Name.ToString(), poke);
+            
+
             labelMonster1Text = new Label { Text = "Monster 1", TextColor = Color.Black, FontSize = 25, VerticalTextAlignment = TextAlignment.Center };
             //Go through each Pokemon and add them to the list.
             pickerMonster1ToAdd = new Picker
@@ -24,12 +38,12 @@ namespace PokeBro
                 Title = "...",
                 VerticalOptions = LayoutOptions.Start
             };
-            foreach (string pokemon in pokemonData.listOfPokemon.Keys)
+            foreach (string pokemon in pokesTemp.Keys)
             {
                 pickerMonster1ToAdd.Items.Add(pokemon);
             }
             
-            labelVersus = new Label { Text = "Versus", TextColor = Color.Black, FontAttributes = FontAttributes.Bold, FontSize = 20, VerticalTextAlignment = TextAlignment.Center };
+            labelVersus = new Label { Text = "Versus", TextColor = Color.Black, FontAttributes = FontAttributes.Bold, FontSize = 20, HorizontalOptions= LayoutOptions.Center};
 
             labelMonster2Text = new Label { Text = "Monster 2", TextColor = Color.Black, FontSize = 25, VerticalTextAlignment = TextAlignment.Center };
             //Go through each Pokemon and add them to the list.
@@ -38,7 +52,7 @@ namespace PokeBro
                 Title = "...",
                 VerticalOptions = LayoutOptions.Start
             };
-            foreach (string pokemon in pokemonData.listOfPokemon.Keys)
+            foreach (string pokemon in pokesTemp.Keys)
             {
                 pickerMonster2ToAdd.Items.Add(pokemon);
             }
@@ -68,6 +82,9 @@ namespace PokeBro
             //Check if all fields were filled in
             if(pickerMonster1ToAdd.SelectedIndex >= 0 && pickerMonster2ToAdd.SelectedIndex >= 0)
             {
+                var genBaseStats = new PokemonBaseStats();
+                genBaseStats.LoadPokes();
+                genBaseStats.LoadTypes();
                 DisplayAlert("And the winner is..", string.Format(""), "OK");
             }
             else

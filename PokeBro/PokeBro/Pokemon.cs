@@ -7,6 +7,7 @@ namespace PokeBro
     {
         public PokemonName Name { get; set; }
         // ReSharper disable once InconsistentNaming
+        public int PokeIndex { get; set; }
         public int CP { get; set; }
         public int Health { get; set; }
         public int Stardust { get; set; }
@@ -14,6 +15,13 @@ namespace PokeBro
         public string GivenName { get; set; }
         public decimal Weight { get; set; }
         public decimal Height { get; set; }
+        public string Type1 { get; set; }
+        public string Type2 { get; set; }
+
+        public int BaseStamina { get; set; }
+        public int BaseAttack { get; set; }
+        public int BaseDefend { get; set; }
+        
         public FastMoves FastAttack { get; set; }
         public SpecialMoves SpecialAttack { get; set; }
         public List<Levels> Levels { get; set; }
