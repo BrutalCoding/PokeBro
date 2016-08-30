@@ -180,9 +180,9 @@ namespace PokeBro
                 int XPGained = amountOfEvolutions * amountOfXPPerEvo;
                 int minTimeMin = (amountOfEvolutions * minSecondsPerEvo) / 60;
                 int maxTimeMin = (amountOfEvolutions * maxSecondsPerEvo) / 60;
-
+                int luckyEggDuration = 1800;
                 var labelConclusionTitle = new Label { Text = "PokéBro thinks that..", TextColor = Color.Black, FontAttributes = FontAttributes.Bold, FontSize = 25, HorizontalTextAlignment = TextAlignment.Center, VerticalOptions = LayoutOptions.Start };
-                var labelConclusionText = new Label { Text = string.Format("You can make {0}XP in {1} to {2} minutes. You need to evolve {3} times in total.", XPGained, minTimeMin, maxTimeMin, amountOfEvolutions), TextColor = Color.Black, FontSize = 18 };
+                var labelConclusionText = new Label { Text = string.Format("You can make {0}XP in {1} to {2} minutes. You should use {4} lucky egg(s) to get {5}XP!\n\nThe total amount of evolve(s) is {3} time(s).", XPGained, minTimeMin, maxTimeMin, amountOfEvolutions, (maxTimeMin*60) / luckyEggDuration, XPGained*2), TextColor = Color.Black, FontSize = 18 };
 
                 //The list has been combined with candies, display this to the user in the listview
                 resultsList.ItemsSource = pokemonList;
