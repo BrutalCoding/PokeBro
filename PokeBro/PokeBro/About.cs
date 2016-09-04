@@ -11,7 +11,7 @@ namespace PokeBro
         {
             background = new StackLayout { Padding = new Thickness(15, 15), BackgroundColor = Color.FromHex("#E3F2FD") };
             layoutTitleBar = new StackLayout { Padding = new Thickness(0,15,0,15), BackgroundColor = Color.FromHex("#90CAF9"), HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.Start };
-            var labelTitle = new Label { Text = "Hi.", TextColor = Color.White, FontAttributes = FontAttributes.Bold, FontSize = 20, HorizontalOptions = LayoutOptions.Center };
+            var labelTitle = new Label { Text = "Swipe left to begin", TextColor = Color.White, FontAttributes = FontAttributes.Bold, FontSize = 20, HorizontalOptions = LayoutOptions.Center };
             layoutTitleBar.Children.Add(labelTitle);
 
             layoutBody = new StackLayout { Padding = new Thickness(0, 15, 0, 15), BackgroundColor = Color.FromHex("#BBDEFB"), HorizontalOptions = LayoutOptions.FillAndExpand, VerticalOptions = LayoutOptions.FillAndExpand };

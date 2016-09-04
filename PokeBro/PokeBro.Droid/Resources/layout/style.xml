@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="MyTheme" parent="MyTheme.Base">
+  </style>
+  <style name="MyTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@colors/brand</item>
+      <item name="colorPrimaryDark">
+        @color/BrandDark<;/item>
+        <item name="colorAccent">
+          @color/Brand<;/item>
+          <item name="windowActionModeOverlay">true</item>
+          <item name="android:datePickerDialogTheme">
+            @style/AppCompatDialogStyle<;/item>
+            <item name="android:timePickerDialogTheme">
+              @style/AppCompatDialogStyle<;/item>
+              <item name="android:alertDialogTheme">
+                @style/AppCompatDialogStyle<;/item>
+                <item name="alertDialogTheme">
+                  @style/AppCompatAlertDialogStyle<;/item>
+                </style>
+  <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+    <item name="colorAccent">
+      @color/Brand<;/item>
+    </style>
+  <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <item name="colorAccent">
+      @color/White<;/item>
+      <item name="android:textColorPrimary">
+        @color/White<;/item>
+        <item name="android:background">
+          @color/Brand<;/item>
+        </style>
+</resources>
