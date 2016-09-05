@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace PokeBro
 {
-    internal class LuckyEgg : ContentPage
+    internal class XPCalc : ContentPage
     {
         //Create the class PD so we can access all Pokemon data.
         PokemonData pokemonData = new PokemonData();
@@ -25,7 +25,7 @@ namespace PokeBro
 
         public Entry inputCandies { get; set; }
 
-        public LuckyEgg()
+        public XPCalc()
         {
             layout = new StackLayout { Padding = new Thickness(15, 15) };
             var scrollview = new ScrollView { Padding = new Thickness(5, 5), Content = layout };

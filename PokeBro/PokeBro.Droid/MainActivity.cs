@@ -20,10 +20,7 @@ namespace PokeBro.Droid
             // set the layout resources first
             ToolbarResource = Resource.Layout.toolbar;
             TabLayoutResource = Resource.Layout.tabs;
-
-            // then call base.OnCreate and the Xamarin.Forms methods
             base.OnCreate(bundle);
-            //SetContentView(Resource.Layout.activity_main);
             Forms.Init(this, bundle);
             LoadApplication(new App());
         }

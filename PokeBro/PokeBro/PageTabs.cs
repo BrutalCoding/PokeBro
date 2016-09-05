@@ -11,11 +11,11 @@ namespace PokeBro
             {
             }));
             Children.Add(new About() { Title = "Start" });
-            Children.Add(new IVCalc() { Title = "IV Calc" });
-            Children.Add(new LuckyEgg() { Title = "XP Calc" });
             Children.Add(new BattleHelper() { Title = "Battle Helper" });
+            Children.Add(new XPCalc() { Title = "XP Calc" });
+            Children.Add(new IVCalc() { Title = "IV Calc" });
             //Children.Add(new Badges() { Title = "Badges" });
-            
+
         }
     }
 }

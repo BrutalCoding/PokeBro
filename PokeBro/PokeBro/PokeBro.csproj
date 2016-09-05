@@ -40,7 +40,7 @@
     <Compile Include="Badges.cs" />
     <Compile Include="BattleHelper.cs" />
     <Compile Include="IVCalc.cs" />
-    <Compile Include="LuckyEgg.cs" />
+    <Compile Include="XPCalc.cs" />
     <Compile Include="PageTabs.cs" />
     <Compile Include="Pokemon.cs" />
     <Compile Include="PokemonBaseStats.cs" />
