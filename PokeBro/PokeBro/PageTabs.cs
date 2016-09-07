@@ -7,10 +7,10 @@ namespace PokeBro
     {
         public PageTabs()
         {
-            Title = "PokéBro - All In One Guide";
+            Title = "PokéBro - Your Very Own Pocket Bro!";
 
             //Share button details
-            var title = "PokéBro - All In One Guide";
+            var title = "PokéBro";
             var message = "Sup, need a bro who can help you with Pokémon? Look in the Play Store for 'PokéBro - All In One Guide'!";
             //var url = ""; //Link of the app in the Play Store
             ToolbarItems.Add(new ToolbarItem("Share", "ic_share_white_24dp.png", async () =>
