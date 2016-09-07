@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Plugin.Share;
+using Xamarin.Forms;
 
 namespace PokeBro
 {
@@ -7,9 +8,17 @@ namespace PokeBro
         public PageTabs()
         {
             Title = "PokéBro - All In One Guide";
-            ToolbarItems.Add(new ToolbarItem("Share", "ic_share_white_24dp.png", () =>
+
+            //Share button details
+            var title = "PokéBro - All In One Guide";
+            var message = "Sup, need a bro who can help you with Pokémon? Look in the Play Store for 'PokéBro - All In One Guide'!";
+            //var url = ""; //Link of the app in the Play Store
+            ToolbarItems.Add(new ToolbarItem("Share", "ic_share_white_24dp.png", async () =>
             {
+                // Share message and an optional title.
+                await CrossShare.Current.Share(message, title);
             }));
+
             Children.Add(new About() { Title = "Start" });
             Children.Add(new BattleHelper() { Title = "Battle Helper" });
             Children.Add(new XPCalc() { Title = "XP Calc" });

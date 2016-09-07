@@ -173,8 +173,15 @@ namespace PokeBro
                 {
                     //Look up the pokemon and know with what to divide with (e.g. Bulbasaur = 25 candies)
                     int candyCost = calcAmountOfEvolvesPossible(pokemonList[i]);
-                    pokemonList[i] = pokemonList[i] + ": " + pokemonCandies[i] + " candies / " + candyCost + " = " + (pokemonCandies[i] / candyCost) + " times";
-                    amountOfEvolutions += (pokemonCandies[i] / candyCost);
+                    if (candyCost != 0)
+                    {
+                        pokemonList[i] = pokemonList[i] + ": " + pokemonCandies[i] + " candies / " + candyCost + " = " + (pokemonCandies[i] / candyCost) + " times";
+                        amountOfEvolutions += (pokemonCandies[i] / candyCost);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
 
                 int XPGained = amountOfEvolutions * amountOfXPPerEvo;
@@ -261,282 +268,282 @@ namespace PokeBro
                     return 12;
                 case "Kakuna":
                     return 50;
-                //case "Beedrill":
-                //    return PokemonName.Beedrill;
-                //case "Pidgey":
-                //    return PokemonName.Pidgey;
-                //case "Pidgeotto":
-                //    return PokemonName.Pidgeotto;
-                //case "Pidgeot":
-                //    return PokemonName.Pidgeot;
-                //case "Rattata":
-                //    return PokemonName.Rattata;
-                //case "Raticate":
-                //    return PokemonName.Raticate;
-                //case "Spearow":
-                //    return PokemonName.Spearow;
-                //case "Fearow":
-                //    return PokemonName.Fearow;
-                //case "Ekans":
-                //    return PokemonName.Ekans;
-                //case "Arbok":
-                //    return PokemonName.Arbok;
-                //case "Pikachu":
-                //    return PokemonName.Pikachu;
-                //case "Raichu":
-                //    return PokemonName.Raichu;
-                //case "Sandshrew":
-                //    return PokemonName.Sandshrew;
-                //case "Sandslash":
-                //    return PokemonName.Sandslash;
-                //case "Nidoran♀":
-                //    return PokemonName.NidoranF;
-                //case "Nidorina":
-                //    return PokemonName.Nidorina;
-                //case "Nidoqueen":
-                //    return PokemonName.Nidoqueen;
-                //case "Nidoran♂":
-                //    return PokemonName.NidoranM;
-                //case "Nidorino":
-                //    return PokemonName.Nidorino;
-                //case "Nidoking":
-                //    return PokemonName.Nidoking;
-                //case "Clefairy":
-                //    return PokemonName.Clefairy;
-                //case "Clefable":
-                //    return PokemonName.Clefable;
-                //case "Vulpix":
-                //    return PokemonName.Vulpix;
-                //case "Ninetales":
-                //    return PokemonName.Ninetales;
-                //case "Jigglypuff":
-                //    return PokemonName.Jigglypuff;
-                //case "Wigglytuff":
-                //    return PokemonName.Wigglytuff;
-                //case "Zubat":
-                //    return PokemonName.Zubat;
-                //case "Golbat":
-                //    return PokemonName.Golbat;
-                //case "Oddish":
-                //    return PokemonName.Oddish;
-                //case "Gloom":
-                //    return PokemonName.Gloom;
-                //case "Vileplume":
-                //    return PokemonName.Vileplume;
-                //case "Paras":
-                //    return PokemonName.Paras;
-                //case "Parasect":
-                //    return PokemonName.Parasect;
-                //case "Venonat":
-                //    return PokemonName.Venonat;
-                //case "Venomoth":
-                //    return PokemonName.Venomoth;
-                //case "Diglett":
-                //    return PokemonName.Diglett;
-                //case "Dugtrio":
-                //    return PokemonName.Dugtrio;
-                //case "Meowth":
-                //    return PokemonName.Meowth;
-                //case "Persian":
-                //    return PokemonName.Persian;
-                //case "Psyduck":
-                //    return PokemonName.Psyduck;
-                //case "Golduck":
-                //    return PokemonName.Golduck;
-                //case "Mankey":
-                //    return PokemonName.Mankey;
-                //case "Primeape":
-                //    return PokemonName.Primeape;
-                //case "Growlithe":
-                //    return PokemonName.Growlithe;
-                //case "Arcanine":
-                //    return PokemonName.Arcanine;
-                //case "Poliwag":
-                //    return PokemonName.Poliwag;
-                //case "Poliwhirl":
-                //    return PokemonName.Poliwhirl;
-                //case "Poliwrath":
-                //    return PokemonName.Poliwrath;
-                //case "Abra":
-                //    return PokemonName.Abra;
-                //case "Kadabra":
-                //    return PokemonName.Kadabra;
-                //case "Alakazam":
-                //    return PokemonName.Alakazam;
-                //case "Machop":
-                //    return PokemonName.Machop;
-                //case "Machoke":
-                //    return PokemonName.Machoke;
-                //case "Machamp":
-                //    return PokemonName.Machamp;
-                //case "Bellsprout":
-                //    return PokemonName.Bellsprout;
-                //case "Weepinbell":
-                //    return PokemonName.Weepinbell;
-                //case "Victreebel":
-                //    return PokemonName.Victreebel;
-                //case "Tentacool":
-                //    return PokemonName.Tentacool;
-                //case "Tentacruel":
-                //    return PokemonName.Tentacruel;
-                //case "Geodude":
-                //    return PokemonName.Geodude;
-                //case "Graveler":
-                //    return PokemonName.Graveler;
-                //case "Golem":
-                //    return PokemonName.Golem;
-                //case "Ponyta":
-                //    return PokemonName.Ponyta;
-                //case "Rapidash":
-                //    return PokemonName.Rapidash;
-                //case "Slowpoke":
-                //    return PokemonName.Slowpoke;
-                //case "Slowbro":
-                //    return PokemonName.Slowbro;
-                //case "Magnemite":
-                //    return PokemonName.Magnemite;
-                //case "Magneton":
-                //    return PokemonName.Magneton;
-                //case "Farfetch'd":
-                //    return PokemonName.Farfetchd;
-                //case "Doduo":
-                //    return PokemonName.Doduo;
-                //case "Dodrio":
-                //    return PokemonName.Dodrio;
-                //case "Seel":
-                //    return PokemonName.Seel;
-                //case "Dewgong":
-                //    return PokemonName.Dewgong;
-                //case "Grimer":
-                //    return PokemonName.Grimer;
-                //case "Muk":
-                //    return PokemonName.Muk;
-                //case "Shellder":
-                //    return PokemonName.Shellder;
-                //case "Cloyster":
-                //    return PokemonName.Cloyster;
-                //case "Gastly":
-                //    return PokemonName.Gastly;
-                //case "Haunter":
-                //    return PokemonName.Haunter;
-                //case "Gengar":
-                //    return PokemonName.Gengar;
-                //case "Onix":
-                //    return PokemonName.Onix;
-                //case "Drowzee":
-                //    return PokemonName.Drowzee;
-                //case "Hypno":
-                //    return PokemonName.Hypno;
-                //case "Krabby":
-                //    return PokemonName.Krabby;
-                //case "Kingler":
-                //    return PokemonName.Kingler;
-                //case "Voltorb":
-                //    return PokemonName.Voltorb;
-                //case "Electrode":
-                //    return PokemonName.Electrode;
-                //case "Exeggcute":
-                //    return PokemonName.Exeggcute;
-                //case "Exeggutor":
-                //    return PokemonName.Exeggutor;
-                //case "Cubone":
-                //    return PokemonName.Cubone;
-                //case "Marowak":
-                //    return PokemonName.Marowak;
-                //case "Hitmonlee":
-                //    return PokemonName.Hitmonlee;
-                //case "Hitmonchan":
-                //    return PokemonName.Hitmonchan;
-                //case "Lickitung":
-                //    return PokemonName.Lickitung;
-                //case "Koffing":
-                //    return PokemonName.Koffing;
-                //case "Weezing":
-                //    return PokemonName.Weezing;
-                //case "Rhyhorn":
-                //    return PokemonName.Rhyhorn;
-                //case "Rhydon":
-                //    return PokemonName.Rhydon;
-                //case "Chansey":
-                //    return PokemonName.Chansey;
-                //case "Tangela":
-                //    return PokemonName.Tangela;
-                //case "Kangaskhan":
-                //    return PokemonName.Kangaskhan;
-                //case "Horsea":
-                //    return PokemonName.Horsea;
-                //case "Seadra":
-                //    return PokemonName.Seadra;
-                //case "Goldeen":
-                //    return PokemonName.Goldeen;
-                //case "Seaking":
-                //    return PokemonName.Seaking;
-                //case "Staryu":
-                //    return PokemonName.Staryu;
-                //case "Starmie":
-                //    return PokemonName.Starmie;
-                //case "Mr. Mime":
-                //    return PokemonName.MrMime;
-                //case "Scyther":
-                //    return PokemonName.Scyther;
-                //case "Jynx":
-                //    return PokemonName.Jynx;
-                //case "Electabuzz":
-                //    return PokemonName.Electabuzz;
-                //case "Magmar":
-                //    return PokemonName.Magmar;
-                //case "Pinsir":
-                //    return PokemonName.Pinsir;
-                //case "Tauros":
-                //    return PokemonName.Tauros;
-                //case "Magikarp":
-                //    return PokemonName.Magikarp;
-                //case "Gyarados":
-                //    return PokemonName.Gyarados;
-                //case "Lapras":
-                //    return PokemonName.Lapras;
-                //case "Ditto":
-                //    return PokemonName.Ditto;
-                //case "Eevee":
-                //    return PokemonName.Eevee;
-                //case "Vaporeon":
-                //    return PokemonName.Vaporeon;
-                //case "Jolteon":
-                //    return PokemonName.Jolteon;
-                //case "Flareon":
-                //    return PokemonName.Flareon;
-                //case "Porygon":
-                //    return PokemonName.Porygon;
-                //case "Omanyte":
-                //    return PokemonName.Omanyte;
-                //case "Omastar":
-                //    return PokemonName.Omastar;
-                //case "Kabuto":
-                //    return PokemonName.Kabuto;
-                //case "Kabutops":
-                //    return PokemonName.Kabutops;
-                //case "Aerodactyl":
-                //    return PokemonName.Aerodactyl;
-                //case "Snorlax":
-                //    return PokemonName.Snorlax;
-                //case "Articuno":
-                //    return PokemonName.Articuno;
-                //case "Zapdos":
-                //    return PokemonName.Zapdos;
-                //case "Moltres":
-                //    return PokemonName.Moltres;
-                //case "Dratini":
-                //    return PokemonName.Dratini;
-                //case "Dragonair":
-                //    return PokemonName.Dragonair;
-                //case "Dragonite":
-                //    return PokemonName.Dragonite;
-                //case "Mew":
-                //    return PokemonName.Mew;
-                //case "Mewtwo":
-                //    return PokemonName.Mewtwo;
+                case "Beedrill":
+                    return 0;
+                case "Pidgey":
+                    return 12;
+                case "Pidgeotto":
+                    return 50;
+                case "Pidgeot":
+                    return 0;
+                case "Rattata":
+                    return 25;
+                case "Raticate":
+                    return 0;
+                case "Spearow":
+                    return 50;
+                case "Fearow":
+                    return 0;
+                case "Ekans":
+                    return 50;
+                case "Arbok":
+                    return 0;
+                case "Pikachu":
+                    return 50;
+                case "Raichu":
+                    return 0;
+                case "Sandshrew":
+                    return 50;
+                case "Sandslash":
+                    return 0;
+                case "Nidoran♀":
+                    return 25;
+                case "Nidorina":
+                    return 100;
+                case "Nidoqueen":
+                    return 0;
+                case "Nidoran♂":
+                    return 25;
+                case "Nidorino":
+                    return 0;
+                case "Nidoking":
+                    return 0;
+                case "Clefairy":
+                    return 50;
+                case "Clefable":
+                    return 0;
+                case "Vulpix":
+                    return 50;
+                case "Ninetales":
+                    return 0;
+                case "Jigglypuff":
+                    return 50;
+                case "Wigglytuff":
+                    return 0;
+                case "Zubat":
+                    return 50;
+                case "Golbat":
+                    return 0;
+                case "Oddish":
+                    return 100;
+                case "Gloom":
+                    return 0;
+                case "Vileplume":
+                    return 0;
+                case "Paras":
+                    return 50;
+                case "Parasect":
+                    return 0;
+                case "Venonat":
+                    return 50;
+                case "Venomoth":
+                    return 0;
+                case "Diglett":
+                    return 50;
+                case "Dugtrio":
+                    return 0;
+                case "Meowth":
+                    return 50;
+                case "Persian":
+                    return 0;
+                case "Psyduck":
+                    return 50;
+                case "Golduck":
+                    return 0;
+                case "Mankey":
+                    return 50;
+                case "Primeape":
+                    return 0;
+                case "Growlithe":
+                    return 50;
+                case "Arcanine":
+                    return 0;
+                case "Poliwag":
+                    return 25;
+                case "Poliwhirl":
+                    return 100;
+                case "Poliwrath":
+                    return 0;
+                case "Abra":
+                    return 25;
+                case "Kadabra":
+                    return 100;
+                case "Alakazam":
+                    return 0;
+                case "Machop":
+                    return 25;
+                case "Machoke":
+                    return 100;
+                case "Machamp":
+                    return 0;
+                case "Bellsprout":
+                    return 25;
+                case "Weepinbell":
+                    return 100;
+                case "Victreebel":
+                    return 0;
+                case "Tentacool":
+                    return 50;
+                case "Tentacruel":
+                    return 0;
+                case "Geodude":
+                    return 25;
+                case "Graveler":
+                    return 100;
+                case "Golem":
+                    return 0;
+                case "Ponyta":
+                    return 50;
+                case "Rapidash":
+                    return 0;
+                case "Slowpoke":
+                    return 50;
+                case "Slowbro":
+                    return 0;
+                case "Magnemite":
+                    return 50;
+                case "Magneton":
+                    return 0;
+                case "Farfetch'd":
+                    return 0;
+                case "Doduo":
+                    return 50;
+                case "Dodrio":
+                    return 0;
+                case "Seel":
+                    return 50;
+                case "Dewgong":
+                    return 0;
+                case "Grimer":
+                    return 50;
+                case "Muk":
+                    return 0;
+                case "Shellder":
+                    return 50;
+                case "Cloyster":
+                    return 0;
+                case "Gastly":
+                    return 25;
+                case "Haunter":
+                    return 100;
+                case "Gengar":
+                    return 0;
+                case "Onix":
+                    return 0;
+                case "Drowzee":
+                    return 50;
+                case "Hypno":
+                    return 0;
+                case "Krabby":
+                    return 50;
+                case "Kingler":
+                    return 0;
+                case "Voltorb":
+                    return 50;
+                case "Electrode":
+                    return 0;
+                case "Exeggcute":
+                    return 50;
+                case "Exeggutor":
+                    return 0;
+                case "Cubone":
+                    return 50;
+                case "Marowak":
+                    return 0;
+                case "Hitmonlee":
+                    return 0;
+                case "Hitmonchan":
+                    return 0;
+                case "Lickitung":
+                    return 0;
+                case "Koffing":
+                    return 50;
+                case "Weezing":
+                    return 0;
+                case "Rhyhorn":
+                    return 50;
+                case "Rhydon":
+                    return 0;
+                case "Chansey":
+                    return 0;
+                case "Tangela":
+                    return 0;
+                case "Kangaskhan":
+                    return 0;
+                case "Horsea":
+                    return 50;
+                case "Seadra":
+                    return 0;
+                case "Goldeen":
+                    return 50;
+                case "Seaking":
+                    return 0;
+                case "Staryu":
+                    return 50;
+                case "Starmie":
+                    return 0;
+                case "Mr. Mime":
+                    return 0;
+                case "Scyther":
+                    return 0;
+                case "Jynx":
+                    return 0;
+                case "Electabuzz":
+                    return 0;
+                case "Magmar":
+                    return 0;
+                case "Pinsir":
+                    return 0;
+                case "Tauros":
+                    return 0;
+                case "Magikarp":
+                    return 400;
+                case "Gyarados":
+                    return 0;
+                case "Lapras":
+                    return 0;
+                case "Ditto":
+                    return 0;
+                case "Eevee":
+                    return 25;
+                case "Vaporeon":
+                    return 0;
+                case "Jolteon":
+                    return 0;
+                case "Flareon":
+                    return 0;
+                case "Porygon":
+                    return 0;
+                case "Omanyte":
+                    return 50;
+                case "Omastar":
+                    return 0;
+                case "Kabuto":
+                    return 50;
+                case "Kabutops":
+                    return 0;
+                case "Aerodactyl":
+                    return 0;
+                case "Snorlax":
+                    return 0;
+                case "Articuno":
+                    return 0;
+                case "Zapdos":
+                    return 0;
+                case "Moltres":
+                    return 0;
+                case "Dratini":
+                    return 25;
+                case "Dragonair":
+                    return 100;
+                case "Dragonite":
+                    return 0;
+                case "Mew":
+                    return 0;
+                case "Mewtwo":
+                    return 0;
                 default:
-                    return 999;
+                    return 999999;
             }
         }
 
