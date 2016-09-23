@@ -2699,6 +2699,9 @@ namespace PokeBro.Droid
 			// aapt resource value: 0x7f0b009b
 			public const int toolbar = 2131427483;
 			
+			// aapt resource value: 0x7f0b009c
+			public const int toolbar_title = 2131427484;
+			
 			// aapt resource value: 0x7f0b0034
 			public const int top = 2131427380;
 			

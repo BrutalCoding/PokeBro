@@ -90,7 +90,7 @@ namespace PokeBro
         void btnAddMonsterToList_OnClick(object sender, EventArgs e)
         {
             //Check if all fields were filled in
-            if((pickerMonsterToAdd.SelectedIndex > 0) && !string.IsNullOrEmpty(inputCandies.Text))
+            if((pickerMonsterToAdd.SelectedIndex >= 0) && !string.IsNullOrEmpty(inputCandies.Text))
             {
                 picker.ItemsSource = listOfAddedMonsters;
                 listOfAddedMonsters.Add(pickerMonsterToAdd.Items[pickerMonsterToAdd.SelectedIndex] + ">" + inputCandies.Text);

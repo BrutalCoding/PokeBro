@@ -110,10 +110,19 @@ namespace PokeBro
                     //If more than 1 combinations are found, inform the user what this means
                     var labelNotice = new Label { Text = "I have found more than 1 possibility, these are your scores:", TextColor = Color.Black, FontSize = 12, HorizontalTextAlignment = TextAlignment.Center };
                     layout.Children.Add(labelNotice);
+
+                }
+                else if (newPoke.Levels.Count == 0)
+                {
+                    //No combinations found
+                    IVScoreBest = "No results found";
+                    IVScoreAverage = "No results found";
+                    IVScoreWorst = "No results found";
                 }
                 var labelMaximum = new Label { Text = "Best: " + IVScoreBest, TextColor = Color.Black, FontSize = 20 };
                 var labelAverage = new Label { Text = "Average: " + IVScoreAverage, TextColor = Color.Black, FontSize = 20 };
                 var labelWorst = new Label { Text = "Worst: " + IVScoreWorst, TextColor = Color.Black, FontSize = 20 };
+
 
                 layout.Children.Add(labelMaximum);
                 layout.Children.Add(labelAverage);

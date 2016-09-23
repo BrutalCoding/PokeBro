@@ -12,7 +12,8 @@ namespace PokeBro
         public App()
         {
             // The root page of your application
-            MainPage = new NavigationPage(new PageTabs());
+            NavigationPage nav = new NavigationPage(new PageTabs());
+            MainPage = nav;
         }
 
         protected override void OnStart()
